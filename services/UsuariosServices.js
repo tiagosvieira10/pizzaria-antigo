@@ -11,9 +11,10 @@ function listar(){
         }
     ))
 }
+const fs = require('fs')
 
 function salvar(arrayDeUsuarios){
-    // Seu código aqui
+    fs.writeFileSync('./databases/usuarios.json')
 }
 
 function cadastrar(objeto){
