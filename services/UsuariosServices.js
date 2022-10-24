@@ -11,10 +11,18 @@ function listar(){
         }
     ))
 }
-const fs = require('fs')
-
+function nome (){
+    
+    console.table(usuarios.map(
+            a => {
+                return a.nome  
+            }
+        ))
+    }
+    
 function salvar(arrayDeUsuarios){
-    fs.writeFileSync('./databases/usuarios.json')
+    const fs = require('fs');
+    fs.writeFileSync('./databases/usuarios.json', JSON.stringify(arrayDeUsuarios, null, 4));
 }
 
 function cadastrar(objeto){
@@ -60,6 +68,8 @@ function alterarFormaDePagamento(novaFormaDePagamento, posicaoDaFormaDePagamento
 const UsuariosServices = {
     cadastrar,
     listar,
+    nome,
+    salvar,
     detalhar,
     remover,
     alterar,
