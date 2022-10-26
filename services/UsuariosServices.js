@@ -25,16 +25,40 @@ function salvar(arrayDeUsuarios){
     fs.writeFileSync('./databases/usuarios.json', JSON.stringify(arrayDeUsuarios, null, 4));
 }
 
+const bcrypt = require('bcrypt');
+
 function cadastrar(objeto){
-// Seu código aqui
+    let senhaCriptografada = bcrypt.hashSync(objeto.senha, 10);
+    let novoId = usuarios[usuarios.length - 1].id + 1;
+
+    let usuario = {
+        id: novoId,
+        nome: objeto.nome,
+        email: objeto.email,
+        senha: senhaCriptografada,
+        enderecos: [objeto.endereco],
+        formasDePagamento: []
+    }
+    usuarios.push(usuario);
+    salvar(usuarios);
 }
 
 function detalhar(idUsuario){
-// Seu código aqui
+
+    console.table(usuarios.map(
+        idUsuario => { 
+            return {
+            nome: idUsuario.nome,
+            email: idUsuario.email,
+            endereco: [idUsuario.enderecos],
+            formasDePagamento: [idUsuario.formasDePagamento]
+        }
+        }
+    ))
 }
 
 function remover(idDoUsuarioParaRemover){
-    // Seu código aqui
+    
 }
 
 function alterar(novosDados, idUsuario){
