@@ -58,7 +58,8 @@ function detalhar(idUsuario){
 }
 
 function remover(idDoUsuarioParaRemover){
-    
+    let idParaRemover = usuarios.findIndex(u => u.id == idDoUsuarioParaRemover)
+    usuarios.splice(idParaRemover,1);
 }
 
 function alterar(novosDados, idUsuario){
