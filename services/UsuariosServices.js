@@ -63,31 +63,60 @@ function remover(idDoUsuarioParaRemover){
 }
 
 function alterar(novosDados, idUsuario){
-    // Seu código aqui
+    const usuario = usuarios.find(usuario => usuario.id == idUsuario)
+    console.log(usuario);
+
+    let senhaCriptografada = bcrypt.hashSync(novosDados.senha, 10)
+
+    usuario.nome = novosDados.nome;
+    usuario.email = novosDados.email;
+    usuario.senha = senhaCriptografada;
+
+    console.log(usuario);
+    salvar(usuarios);
 }
 
 function addEndereco(novoEndereco, idUsuario){
-    // Seu código aqui
+    var usuario = usuarios.find (usuario => idUsuario === usuario.id);
+    usuario.enderecos = novoEndereco.enderecos;
+    
+    usuarios.push(usuario);
+    salvar(usuario);
 }
 
 function removerEndereco(posicaoDoEndereco, idUsuario){
-// Seu código aqui
+    let enderecoDoId = enderecos.findIndex (a => a.id == idUsuario)
+    usuarios.splice(posicaoDoEndereco, 1);
 }
 
 function alterarEndereco(posicaoDoEndereco, novoEndereco, idUsuario){
-// Seu código aqui        
+    const usuario = usuarios.find(usuario => usuario.id == idUsuario)
+    usuario.enderecos[posicaoDoEndereco] = novoEndereco;
+
+    salvar(usuarios);
 }
 
 function addFormaDePagamento(novaFormaDePagamento, idUsuario){
-    // Seu código aqui
+    var pagamento = usuarios.find (pagamento => idUsuario === pagamento.id);
+    usuario.formasDePagamento = novaFormaDePagamento.formasDePagamento;
+    
+    formasDePagamento.push(pagamento);
+    salvar(pagamento);
 }
 
 function removerFormaDePagamento(posicaoDaFormaDePagamento, idUsuario){
-    // Seu código aqui
+    let pagamentoDoId = formasDePagamento.findIndex (a => a.id == idUsuario)
+    usuarios.splice(posicaoDaFormaDePagamento, 1); 
 }
 
 function alterarFormaDePagamento(novaFormaDePagamento, posicaoDaFormaDePagamento, idUsuario){
-    // Seu código aqui
+    const usuario = usuarios.find(usuario => usuario.id == idUsuario)
+    console.log(usuario);
+
+    usuario.formasDePagamento[posicaoDaFormaDePagamento] = novaFormaDePagamento;
+
+    console.log(usuario);
+    salvar(usuarios);
 }
 
 const UsuariosServices = {
@@ -106,4 +135,4 @@ const UsuariosServices = {
     alterarFormaDePagamento
 }
 
-module.exports = UsuariosServices;
+module.exports = UsuariosServices; 
