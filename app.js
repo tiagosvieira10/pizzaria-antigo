@@ -1,10 +1,16 @@
 const express = require('express');
-const servidor = express();
+const path = require('path');
 
-servidor.get('/usuarios', (req, res)=>{
+const servidor = express();
+servidor.use(express.static(path.join(__dirname, 'public/img')))
+
+servidor.get('/', (req, res)=>{
     console.log("chegou uma requisição");
-    // res.send("Permaneça em linha!");
     return res.sendFile(__dirname + "/views/index.html");
 });
+
+servidor.get('/carrinho', (req,res)=>{
+    return res.sendFile(__dirname + "/views/carrinho.html");
+})
 
 servidor.listen(3000);
