@@ -2,5 +2,5 @@ body {
     background-color: gray;
 }
 header {
-    border: 3px solid white;
+    border: 3px dotted white;
 }
